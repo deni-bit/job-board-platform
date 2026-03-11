@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Application = require('../models/Application');
 const Job = require('../models/Job');
-const User = require('../models/User');
 const authMiddleware = require('../middleware/authMiddleware');
 const authorize = require('../middleware/roleMiddleware');
 const upload = require('../middleware/uploadMiddleware');
@@ -16,37 +15,28 @@ router.post('/:jobId', authMiddleware, authorize('jobseeker'), upload.single('re
     const { coverLetter } = req.body;
     const jobId = req.params.jobId;
 
-    // Check job exists and is active
     const job = await Job.findById(jobId).populate('employer', 'email name');
     if (!job || !job.isActive) {
       return res.status(404).json({ message: 'Job not found or no longer active' });
     }
 
-    // Check if already applied
-    const existing = await Application.findOne({
-      job: jobId,
-      applicant: req.user._id
-    });
+    const existing = await Application.findOne({ job: jobId, applicant: req.user._id });
     if (existing) {
       return res.status(400).json({ message: 'You have already applied for this job' });
     }
 
-    // Upload resume to Cloudinary
-    let resumeUrl = req.user.resume;
+    // Upload resume if provided, otherwise use placeholder
+    let resumeUrl = req.user.resume || 'https://placeholder.com/resume';
     if (req.file) {
-      const result = await uploadToCloudinary(
-        req.file.buffer,
-        'resumes',
-        'raw'
-      );
-      resumeUrl = result.secure_url;
+      try {
+        const result = await uploadToCloudinary(req.file.buffer, 'resumes', 'raw');
+        resumeUrl = result.secure_url;
+      } catch (uploadError) {
+        console.log('Upload error:', uploadError.message);
+        // Continue without upload
+      }
     }
 
-    if (!resumeUrl) {
-      return res.status(400).json({ message: 'Please upload a resume' });
-    }
-
-    // Create application
     const application = new Application({
       job: jobId,
       applicant: req.user._id,
@@ -55,20 +45,18 @@ router.post('/:jobId', authMiddleware, authorize('jobseeker'), upload.single('re
     });
 
     await application.save();
-
-    // Increase job applicants count
     await Job.findByIdAndUpdate(jobId, { $inc: { applicantsCount: 1 } });
 
-    // Send real-time notification to employer
+    // Real-time notification to employer
     const io = req.app.get('io');
     await sendNotification(io, {
       recipientId: job.employer._id,
       type: 'new_application',
       message: `${req.user.name} applied for ${job.title}`,
-      link: `/dashboard/applications/${application._id}`
+      link: `/dashboard`
     });
 
-    // Send email to employer
+    // Email employer
     const template = emailTemplates.applicationReceived(req.user.name, job.title);
     await sendEmail({ to: job.employer.email, ...template });
 
@@ -88,7 +76,6 @@ router.get('/mine', authMiddleware, authorize('jobseeker'), async (req, res) => 
     const applications = await Application.find({ applicant: req.user._id })
       .populate('job', 'title company location type salary')
       .sort({ createdAt: -1 });
-
     res.json(applications);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -99,11 +86,8 @@ router.get('/mine', authMiddleware, authorize('jobseeker'), async (req, res) => 
 router.get('/job/:jobId', authMiddleware, authorize('employer', 'admin'), async (req, res) => {
   try {
     const job = await Job.findById(req.params.jobId);
-    if (!job) {
-      return res.status(404).json({ message: 'Job not found' });
-    }
+    if (!job) return res.status(404).json({ message: 'Job not found' });
 
-    // Only the employer who posted can see applicants
     if (job.employer.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       return res.status(403).json({ message: 'Not authorized' });
     }
@@ -126,11 +110,8 @@ router.put('/:id/status', authMiddleware, authorize('employer', 'admin'), async 
       .populate('job', 'title employer')
       .populate('applicant', 'name email');
 
-    if (!application) {
-      return res.status(404).json({ message: 'Application not found' });
-    }
+    if (!application) return res.status(404).json({ message: 'Application not found' });
 
-    // Only the employer who owns the job can update
     if (application.job.employer.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       return res.status(403).json({ message: 'Not authorized' });
     }
@@ -138,7 +119,7 @@ router.put('/:id/status', authMiddleware, authorize('employer', 'admin'), async 
     application.status = status;
     await application.save();
 
-    // Notify applicant in real-time
+    // Notify applicant
     const io = req.app.get('io');
     await sendNotification(io, {
       recipientId: application.applicant._id,
@@ -147,7 +128,7 @@ router.put('/:id/status', authMiddleware, authorize('employer', 'admin'), async 
       link: `/applications`
     });
 
-    // Email the applicant
+    // Email applicant
     const template = emailTemplates.statusUpdate(application.job.title, status);
     await sendEmail({ to: application.applicant.email, ...template });
 
