@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard'
 import PostJob from './pages/PostJob'
 import Applications from './pages/Applications'
 import AdminPanel from './pages/AdminPanel'
+import PublicProfile from './pages/PublicProfile'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/jobs/:id" element={<JobDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile/:id" element={<PublicProfile />} />
         <Route path="/dashboard" element={
           <PrivateRoute roles={['employer']}>
             <Dashboard />
