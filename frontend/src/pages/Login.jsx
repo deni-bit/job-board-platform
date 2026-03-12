@@ -8,6 +8,7 @@ const Login = () => {
   const navigate = useNavigate()
   const { loading, error, user } = useSelector((state) => state.auth)
   const [form, setForm] = useState({ email: '', password: '' })
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     if (user) navigate('/')
@@ -27,7 +28,6 @@ const Login = () => {
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem'
     }}>
       <div style={{ width: '100%', maxWidth: '440px' }}>
-
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
@@ -60,7 +60,7 @@ const Login = () => {
           )}
 
           <form onSubmit={handleSubmit}>
-
+            {/* Email */}
             <div style={{ marginBottom: '1.25rem' }}>
               <label style={{
                 display: 'block', fontFamily: 'DM Sans', fontWeight: 500,
@@ -78,21 +78,38 @@ const Login = () => {
               />
             </div>
 
+            {/* Password */}
             <div style={{ marginBottom: '2rem' }}>
               <label style={{
                 display: 'block', fontFamily: 'DM Sans', fontWeight: 500,
                 color: '#CBD5E1', fontSize: '0.875rem', marginBottom: '0.5rem'
               }}>Password</label>
-              <input
-                type="password" name="password" value={form.password}
-                onChange={handleChange} required placeholder="••••••••"
-                style={{
-                  width: '100%', background: '#1A2235', border: '1px solid #1E293B',
-                  color: '#F8FAFC', fontFamily: 'DM Sans', fontSize: '0.95rem',
-                  padding: '0.8rem 1rem', borderRadius: '10px', outline: 'none',
-                  boxSizing: 'border-box'
-                }}
-              />
+              <div style={{ position: 'relative' }}>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password" value={form.password}
+                  onChange={handleChange} required placeholder="••••••••"
+                  style={{
+                    width: '100%', background: '#1A2235', border: '1px solid #1E293B',
+                    color: '#F8FAFC', fontFamily: 'DM Sans', fontSize: '0.95rem',
+                    padding: '0.8rem 3rem 0.8rem 1rem', borderRadius: '10px', outline: 'none',
+                    boxSizing: 'border-box'
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: 'absolute', right: '0.85rem', top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    color: '#64748B', fontSize: '1.1rem', padding: 0,
+                    display: 'flex', alignItems: 'center'
+                  }}
+                >
+                  {showPassword ? '🙈' : '👁️'}
+                </button>
+              </div>
             </div>
 
             <button type="submit" disabled={loading} style={{
