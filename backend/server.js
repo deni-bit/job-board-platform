@@ -7,7 +7,6 @@ const { Server } = require('socket.io');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
-const xss = require('xss-clean');
 const hpp = require('hpp');
 
 dotenv.config();
@@ -15,20 +14,17 @@ dotenv.config();
 const app = express();
 
 // ── SECURITY HEADERS ───────────────────────────────────────────────────────
-// Helmet sets 14 HTTP security headers automatically
 app.use(helmet());
 
 // ── RATE LIMITING ──────────────────────────────────────────────────────────
-// General rate limit — 100 requests per 15 minutes per IP
 const generalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000,
   max: 100,
   message: { message: 'Too many requests from this IP, please try again after 15 minutes' },
   standardHeaders: true,
   legacyHeaders: false,
 });
 
-// Strict rate limit for auth routes — 10 attempts per 15 minutes
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 10,
@@ -37,16 +33,14 @@ const authLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-// AI rate limit — 20 requests per hour per IP
 const aiLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 1 hour
+  windowMs: 60 * 60 * 1000,
   max: 20,
   message: { message: 'AI request limit reached, please try again after an hour' },
   standardHeaders: true,
   legacyHeaders: false,
 });
 
-// Apply general limiter to all routes
 app.use(generalLimiter);
 
 // ── CORS ───────────────────────────────────────────────────────────────────
@@ -58,11 +52,8 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, Postman, curl)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
+    if (allowedOrigins.includes(origin)) return callback(null, true);
     return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
@@ -71,17 +62,13 @@ app.use(cors({
 }));
 
 // ── BODY PARSER ────────────────────────────────────────────────────────────
-app.use(express.json({ limit: '10kb' })); // Limit body size to 10kb
+app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // ── DATA SANITIZATION ──────────────────────────────────────────────────────
-// Prevent MongoDB operator injection attacks e.g. { "$gt": "" }
 app.use(mongoSanitize());
 
-// Prevent XSS attacks — sanitize user input from HTML tags
-app.use(xss());
-
-// Prevent HTTP Parameter Pollution
+// ── HTTP PARAMETER POLLUTION ───────────────────────────────────────────────
 app.use(hpp());
 
 // ── CREATE HTTP SERVER ─────────────────────────────────────────────────────
@@ -95,7 +82,6 @@ const io = new Server(server, {
   }
 });
 
-// Make io accessible in routes via req.app.get('io')
 app.set('io', io);
 
 // ── DATABASE ───────────────────────────────────────────────────────────────
@@ -108,7 +94,6 @@ const { initSocket } = require('./socket/index');
 initSocket(io);
 
 // ── ROUTES ─────────────────────────────────────────────────────────────────
-// Apply strict rate limit to auth routes
 app.use('/api/auth', authLimiter, require('./routes/auth'));
 app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/applications', require('./routes/applications'));
@@ -130,31 +115,23 @@ app.use('*', (req, res) => {
 app.use((err, req, res, next) => {
   console.error('❌ Error:', err.message);
 
-  // Handle CORS errors
   if (err.message === 'Not allowed by CORS') {
     return res.status(403).json({ message: 'CORS policy violation' });
   }
-
-  // Handle JWT errors
   if (err.name === 'JsonWebTokenError') {
     return res.status(401).json({ message: 'Invalid token' });
   }
-
   if (err.name === 'TokenExpiredError') {
     return res.status(401).json({ message: 'Token expired, please login again' });
   }
-
-  // Handle MongoDB errors
   if (err.name === 'CastError') {
     return res.status(400).json({ message: 'Invalid ID format' });
   }
-
   if (err.code === 11000) {
     const field = Object.keys(err.keyValue)[0];
     return res.status(400).json({ message: `${field} already exists` });
   }
 
-  // Default server error
   res.status(err.status || 500).json({
     message: process.env.NODE_ENV === 'production'
       ? 'Something went wrong'

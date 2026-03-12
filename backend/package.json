@@ -26,7 +26,7 @@
     "nodemailer": "^8.0.2",
     "socket.io": "^4.8.3",
     "stripe": "^20.4.1",
-    "xss-clean": "^0.1.4"
+    "xss": "^1.0.15"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
