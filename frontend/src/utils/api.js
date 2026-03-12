@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://job-board-platform-5wiz.onrender.com',
+  baseURL: 'https://job-board-platform-5wiz.onrender.com/api',
 })
 
 // Automatically attach token to every request
