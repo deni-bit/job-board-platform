@@ -55,6 +55,29 @@ const JobDetail = () => {
     return `${days} days ago`
   }
 
+  const getCountdown = (deadline) => {
+    if (!deadline) return null
+    const diff = new Date(deadline) - Date.now()
+    if (diff <= 0) return {
+      text: 'Expired', color: '#EF4444',
+      bg: 'rgba(239,68,68,0.1)', border: 'rgba(239,68,68,0.3)'
+    }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    if (days > 7) return {
+      text: `${days} days left`, color: '#10B981',
+      bg: 'rgba(16,185,129,0.1)', border: 'rgba(16,185,129,0.3)'
+    }
+    if (days > 0) return {
+      text: `${days}d ${hours}h left`, color: '#F59E0B',
+      bg: 'rgba(245,158,11,0.1)', border: 'rgba(245,158,11,0.3)'
+    }
+    return {
+      text: `${hours} hours left`, color: '#EF4444',
+      bg: 'rgba(239,68,68,0.1)', border: 'rgba(239,68,68,0.3)'
+    }
+  }
+
   const typeColors = {
     'full-time': '#4ADE80',
     'part-time': '#60A5FA',
@@ -73,6 +96,8 @@ const JobDetail = () => {
       <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>Job not found</p>
     </div>
   )
+
+  const countdown = getCountdown(job.deadline)
 
   return (
     <div style={{ background: '#0A0F1E', minHeight: '100vh', padding: '3rem 1.5rem' }}>
@@ -150,6 +175,17 @@ const JobDetail = () => {
                   fontFamily: 'DM Sans', fontSize: '0.8rem',
                   padding: '0.3rem 0.75rem', borderRadius: '4px'
                 }}>Posted {timeAgo(job.createdAt)}</span>
+
+                {/* ⏰ Countdown Timer */}
+                {countdown && (
+                  <span style={{
+                    background: countdown.bg,
+                    color: countdown.color,
+                    border: `1px solid ${countdown.border}`,
+                    fontFamily: 'DM Sans', fontSize: '0.8rem', fontWeight: 600,
+                    padding: '0.3rem 0.75rem', borderRadius: '4px'
+                  }}>⏰ {countdown.text}</span>
+                )}
               </div>
             </div>
 
@@ -183,6 +219,30 @@ const JobDetail = () => {
               )}
             </div>
           </div>
+
+          {/* Deadline Banner — shown when expiring soon or expired */}
+          {countdown && (countdown.color === '#EF4444' || countdown.color === '#F59E0B') && (
+            <div style={{
+              marginTop: '1.5rem',
+              background: countdown.bg,
+              border: `1px solid ${countdown.border}`,
+              borderRadius: '10px', padding: '0.75rem 1.25rem',
+              display: 'flex', alignItems: 'center', gap: '0.6rem'
+            }}>
+              <span style={{ fontSize: '1rem' }}>
+                {countdown.color === '#EF4444' ? '🚫' : '⚠️'}
+              </span>
+              <span style={{
+                fontFamily: 'DM Sans', fontSize: '0.9rem',
+                fontWeight: 600, color: countdown.color
+              }}>
+                {countdown.color === '#EF4444'
+                  ? 'This job has expired and is no longer accepting applications.'
+                  : `Closing soon — only ${countdown.text}. Apply before it\'s too late!`
+                }
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Apply Form */}
