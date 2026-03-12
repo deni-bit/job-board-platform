@@ -106,8 +106,8 @@ app.get('/', (req, res) => {
   res.json({ message: '🚀 JobConnect API is running' });
 });
 
-// ── 404 HANDLER ────────────────────────────────────────────────────────────
-app.use('*', (req, res) => {
+// ── 404 HANDLER (Express 5 compatible) ────────────────────────────────────
+app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
