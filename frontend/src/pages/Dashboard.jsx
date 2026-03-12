@@ -223,6 +223,7 @@ const Dashboard = () => {
                         background: '#111827', border: '1px solid #1E293B',
                         borderRadius: '14px', padding: '1.25rem'
                       }}>
+                        {/* Applicant Info */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
                           <div>
                             <p style={{ fontFamily: 'DM Sans', fontWeight: 600, color: '#F8FAFC', marginBottom: '0.2rem' }}>
@@ -240,20 +241,24 @@ const Dashboard = () => {
                           }}>{app.status}</span>
                         </div>
 
+                        {/* Skills */}
                         {app.applicant?.skills?.length > 0 && (
                           <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
-                            {app.applicant.skills.map(s => (
-                              <span key={s} style={{
+                            {app.applicant.skills.map(skill => (
+                              <span key={skill} style={{
                                 background: '#1A2235', color: '#64748B',
                                 fontFamily: 'JetBrains Mono', fontSize: '0.65rem',
                                 padding: '0.2rem 0.5rem', borderRadius: '4px',
                                 border: '1px solid #1E293B'
-                              }}>{s}</span>
+                              }}>{skill}</span>
                             ))}
                           </div>
                         )}
 
+                        {/* Actions */}
                         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+
+                          {/* View CV */}
                           {app.resume && (
                             <a href={app.resume} target="_blank" rel="noreferrer" style={{
                               background: 'rgba(245,158,11,0.1)', color: '#F59E0B',
@@ -263,6 +268,17 @@ const Dashboard = () => {
                               textDecoration: 'none'
                             }}>📄 View CV</a>
                           )}
+
+                          {/* View Profile */}
+                          <a href={`/profile/${app.applicant?._id}`} target="_blank" rel="noreferrer" style={{
+                            background: 'rgba(96,165,250,0.1)', color: '#60A5FA',
+                            border: '1px solid rgba(96,165,250,0.2)',
+                            fontFamily: 'DM Sans', fontSize: '0.8rem', fontWeight: 500,
+                            padding: '0.3rem 0.75rem', borderRadius: '6px',
+                            textDecoration: 'none'
+                          }}>👤 View Profile</a>
+
+                          {/* Status Selector */}
                           <select
                             value={app.status}
                             onChange={e => updateStatus(app._id, e.target.value)}
