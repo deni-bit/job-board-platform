@@ -7,7 +7,6 @@ const { Server } = require('socket.io');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
-const hpp = require('hpp');
 
 dotenv.config();
 
@@ -68,9 +67,6 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 // ── DATA SANITIZATION ──────────────────────────────────────────────────────
 app.use(mongoSanitize());
 
-// ── HTTP PARAMETER POLLUTION ───────────────────────────────────────────────
-app.use(hpp());
-
 // ── CREATE HTTP SERVER ─────────────────────────────────────────────────────
 const server = http.createServer(app);
 
@@ -106,7 +102,7 @@ app.get('/', (req, res) => {
   res.json({ message: '🚀 JobConnect API is running' });
 });
 
-// ── 404 HANDLER (Express 5 compatible) ────────────────────────────────────
+// ── 404 HANDLER ────────────────────────────────────────────────────────────
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
