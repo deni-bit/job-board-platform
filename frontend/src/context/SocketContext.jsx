@@ -10,7 +10,9 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     // Connect to socket server
-    socketRef.current = io('https://job-board-platform-5wiz.onrender.com')
+    socketRef.current = io('https://job-board-platform-5wiz.onrender.com',{
+             transports: ['polling']
+})
 
     return () => {
       socketRef.current.disconnect()
