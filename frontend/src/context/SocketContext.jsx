@@ -10,7 +10,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     // Connect to socket server
-    socketRef.current = io('http://localhost:5000')
+    socketRef.current = io('http://job-board-platform-5wiz.onrender.com')
 
     return () => {
       socketRef.current.disconnect()
