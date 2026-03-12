@@ -36,10 +36,42 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
+
+  // ── BASIC COMPANY INFO ──────────────────────────────────────────────────
   company: {
     type: String,
     default: ''
   },
+  companyLogo: {
+    type: String,
+    default: ''
+  },
+  companyWebsite: {
+    type: String,
+    default: ''
+  },
+  companySize: {
+    type: String,
+    enum: ['1-10', '11-50', '51-200', '201-500', '500+', ''],
+    default: ''
+  },
+  companyIndustry: {
+    type: String,
+    default: ''
+  },
+  companyDescription: {
+    type: String,
+    default: ''
+  },
+  companyLocation: {
+    type: String,
+    default: ''
+  },
+  companyFoundedYear: {
+    type: Number,
+    default: null
+  },
+
   isVerified: {
     type: Boolean,
     default: false
