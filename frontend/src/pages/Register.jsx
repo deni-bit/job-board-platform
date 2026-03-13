@@ -8,6 +8,7 @@ const Register = () => {
   const navigate = useNavigate()
   const { loading, error, user } = useSelector((state) => state.auth)
   const [form, setForm] = useState({ name: '', email: '', password: '', role: 'jobseeker', company: '' })
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     if (user) navigate('/')
@@ -15,6 +16,7 @@ const Register = () => {
   }, [user])
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(registerUser(form))
@@ -37,7 +39,6 @@ const Register = () => {
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem'
     }}>
       <div style={{ width: '100%', maxWidth: '480px' }}>
-
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 700, color: 'var(--text)' }}>
@@ -54,7 +55,6 @@ const Register = () => {
         </div>
 
         <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '20px', padding: '2.5rem' }}>
-
           {error && (
             <div style={{
               background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)',
@@ -64,7 +64,6 @@ const Register = () => {
           )}
 
           <form onSubmit={handleSubmit}>
-
             {/* Role Toggle */}
             <div style={{ marginBottom: '1.5rem' }}>
               <label style={labelStyle}>I am a...</label>
@@ -73,16 +72,12 @@ const Register = () => {
                   <button key={role} type="button"
                     onClick={() => setForm({ ...form, role })}
                     style={{
-                      padding: '0.85rem',
-                      borderRadius: '10px',
+                      padding: '0.85rem', borderRadius: '10px',
                       border: form.role === role ? '1px solid #F59E0B' : '1px solid var(--border)',
                       background: form.role === role ? 'rgba(245,158,11,0.1)' : 'var(--surface2)',
                       color: form.role === role ? '#F59E0B' : 'var(--muted)',
-                      fontFamily: 'DM Sans, sans-serif',
-                      fontWeight: 600,
-                      fontSize: '0.9rem',
-                      cursor: 'pointer',
-                      textTransform: 'capitalize'
+                      fontFamily: 'DM Sans, sans-serif', fontWeight: 600,
+                      fontSize: '0.9rem', cursor: 'pointer', textTransform: 'capitalize'
                     }}>
                     {role === 'jobseeker' ? '🔍 Job Seeker' : '🏢 Employer'}
                   </button>
@@ -90,6 +85,7 @@ const Register = () => {
               </div>
             </div>
 
+            {/* Full Name */}
             <div style={{ marginBottom: '1.25rem' }}>
               <label style={labelStyle}>Full Name</label>
               <input type="text" name="name" value={form.name}
@@ -97,6 +93,7 @@ const Register = () => {
                 style={inputStyle} />
             </div>
 
+            {/* Email */}
             <div style={{ marginBottom: '1.25rem' }}>
               <label style={labelStyle}>Email address</label>
               <input type="email" name="email" value={form.email}
@@ -104,6 +101,7 @@ const Register = () => {
                 style={inputStyle} />
             </div>
 
+            {/* Company — employer only */}
             {form.role === 'employer' && (
               <div style={{ marginBottom: '1.25rem' }}>
                 <label style={labelStyle}>Company Name</label>
@@ -113,11 +111,30 @@ const Register = () => {
               </div>
             )}
 
+            {/* Password with show/hide */}
             <div style={{ marginBottom: '2rem' }}>
               <label style={labelStyle}>Password</label>
-              <input type="password" name="password" value={form.password}
-                onChange={handleChange} required placeholder="Min. 6 characters"
-                style={inputStyle} />
+              <div style={{ position: 'relative' }}>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password" value={form.password}
+                  onChange={handleChange} required placeholder="Min. 6 characters"
+                  style={{ ...inputStyle, padding: '0.8rem 3rem 0.8rem 1rem' }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: 'absolute', right: '0.85rem', top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    color: 'var(--muted)', fontSize: '1.1rem', padding: 0,
+                    display: 'flex', alignItems: 'center'
+                  }}
+                >
+                  {showPassword ? '🙈' : '👁️'}
+                </button>
+              </div>
             </div>
 
             <button type="submit" disabled={loading} style={{
