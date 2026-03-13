@@ -155,35 +155,33 @@ const Navbar = () => {
             </>
           )}
 
-          {/* Theme Toggle */}
+          {/* Theme Toggle — desktop only */}
           <ThemeToggle />
         </div>
 
         {/* Mobile right side — toggle + hamburger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }} className="md:hidden">
+        <div className="md:hidden" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <ThemeToggle />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="flex flex-col justify-center items-center gap-1.5 p-2"
-            style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
-            <span style={{
-              display: 'block', width: '24px', height: '2px',
-              background: 'var(--text)',
-              transition: 'all 0.3s',
-              transform: menuOpen ? 'rotate(45deg) translateY(6px)' : 'none'
-            }} />
-            <span style={{
-              display: 'block', width: '24px', height: '2px',
-              background: 'var(--text)',
-              transition: 'all 0.3s',
-              opacity: menuOpen ? 0 : 1
-            }} />
-            <span style={{
-              display: 'block', width: '24px', height: '2px',
-              background: 'var(--text)',
-              transition: 'all 0.3s',
-              transform: menuOpen ? 'rotate(-45deg) translateY(-6px)' : 'none'
-            }} />
+            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '0.25rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+              <span style={{
+                display: 'block', width: '24px', height: '2px',
+                background: 'var(--text)', transition: 'all 0.3s',
+                transform: menuOpen ? 'rotate(45deg) translateY(7px)' : 'none'
+              }} />
+              <span style={{
+                display: 'block', width: '24px', height: '2px',
+                background: 'var(--text)', transition: 'all 0.3s',
+                opacity: menuOpen ? 0 : 1
+              }} />
+              <span style={{
+                display: 'block', width: '24px', height: '2px',
+                background: 'var(--text)', transition: 'all 0.3s',
+                transform: menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none'
+              }} />
+            </div>
           </button>
         </div>
       </div>
@@ -201,19 +199,12 @@ const Navbar = () => {
             <>
               <Link to="/login" style={linkStyle} onClick={() => setMenuOpen(false)}>Login</Link>
               <Link to="/register" onClick={() => setMenuOpen(false)} style={{
-                display: 'inline-block',
-                marginTop: '0.5rem',
+                display: 'inline-block', marginTop: '0.5rem',
                 background: 'linear-gradient(135deg, #F59E0B, #D97706)',
-                color: '#0A0F1E',
-                fontFamily: 'DM Sans, sans-serif',
-                fontWeight: 600,
-                fontSize: '0.9rem',
-                padding: '0.6rem 1.4rem',
-                borderRadius: '8px',
-                textDecoration: 'none',
-              }}>
-                Get Started
-              </Link>
+                color: '#0A0F1E', fontFamily: 'DM Sans, sans-serif',
+                fontWeight: 600, fontSize: '0.9rem',
+                padding: '0.6rem 1.4rem', borderRadius: '8px', textDecoration: 'none',
+              }}>Get Started</Link>
             </>
           ) : (
             <>
@@ -230,7 +221,6 @@ const Navbar = () => {
                   textTransform: 'uppercase', letterSpacing: '0.08em'
                 }}>{user.role}</span>
               </div>
-
               {user.role === 'employer' && (
                 <>
                   <Link to="/post-job" style={linkStyle} onClick={() => setMenuOpen(false)}>Post Job</Link>
@@ -243,22 +233,13 @@ const Navbar = () => {
               {user.role === 'admin' && (
                 <Link to="/admin" style={linkStyle} onClick={() => setMenuOpen(false)}>Admin</Link>
               )}
-
               <button onClick={handleLogout} style={{
-                marginTop: '0.75rem',
-                background: 'transparent',
-                border: '1px solid #EF4444',
-                color: '#EF4444',
-                fontFamily: 'DM Sans',
-                fontWeight: 500,
-                fontSize: '0.9rem',
-                padding: '0.5rem 1.2rem',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                width: '100%'
-              }}>
-                Logout
-              </button>
+                marginTop: '0.75rem', background: 'transparent',
+                border: '1px solid #EF4444', color: '#EF4444',
+                fontFamily: 'DM Sans', fontWeight: 500, fontSize: '0.9rem',
+                padding: '0.5rem 1.2rem', borderRadius: '8px',
+                cursor: 'pointer', width: '100%'
+              }}>Logout</button>
             </>
           )}
         </div>
