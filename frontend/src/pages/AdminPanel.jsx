@@ -51,28 +51,28 @@ const AdminPanel = () => {
     borderRadius: '8px',
     border: activeTab === tab ? '1px solid rgba(245,158,11,0.4)' : '1px solid transparent',
     background: activeTab === tab ? 'rgba(245,158,11,0.1)' : 'transparent',
-    color: activeTab === tab ? '#F59E0B' : '#94A3B8',
+    color: activeTab === tab ? '#F59E0B' : 'var(--muted)',
     fontFamily: 'DM Sans', fontWeight: 500, fontSize: '0.9rem',
     cursor: 'pointer'
   })
 
   if (loading) return (
-    <div style={{ minHeight: '100vh', background: '#0A0F1E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>Loading admin panel...</p>
+    <div style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>Loading admin panel...</p>
     </div>
   )
 
   return (
-    <div style={{ background: '#0A0F1E', minHeight: '100vh', padding: '3rem 1.5rem' }}>
+    <div style={{ background: 'var(--navy)', minHeight: '100vh', padding: '3rem 1.5rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
         {/* Header */}
         <div style={{ marginBottom: '2.5rem' }}>
           <h1 style={{
             fontFamily: 'Playfair Display, serif', fontSize: '2.5rem',
-            fontWeight: 700, color: '#F8FAFC', marginBottom: '0.3rem'
+            fontWeight: 700, color: 'var(--text)', marginBottom: '0.3rem'
           }}>Admin Panel</h1>
-          <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>
+          <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>
             Full platform control
           </p>
         </div>
@@ -97,7 +97,7 @@ const AdminPanel = () => {
               { label: 'Applications', value: stats.totalApplications, icon: '📋', color: '#FCD34D' },
             ].map(stat => (
               <div key={stat.label} style={{
-                background: '#111827', border: '1px solid #1E293B',
+                background: 'var(--surface)', border: '1px solid var(--border)',
                 borderRadius: '16px', padding: '1.75rem'
               }}>
                 <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{stat.icon}</div>
@@ -105,7 +105,7 @@ const AdminPanel = () => {
                   fontFamily: 'Playfair Display, serif', fontSize: '2.2rem',
                   fontWeight: 700, color: stat.color, marginBottom: '0.25rem'
                 }}>{stat.value}</div>
-                <div style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.9rem' }}>
+                <div style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.9rem' }}>
                   {stat.label}
                 </div>
               </div>
@@ -116,22 +116,22 @@ const AdminPanel = () => {
         {/* Users */}
         {activeTab === 'users' && (
           <div>
-            <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', marginBottom: '1.25rem' }}>
+            <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', marginBottom: '1.25rem' }}>
               {users.length} total users
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {users.map(user => (
                 <div key={user._id} style={{
-                  background: '#111827', border: '1px solid #1E293B',
+                  background: 'var(--surface)', border: '1px solid var(--border)',
                   borderRadius: '14px', padding: '1.25rem',
                   display: 'flex', justifyContent: 'space-between',
                   alignItems: 'center', flexWrap: 'wrap', gap: '1rem'
                 }}>
                   <div>
-                    <p style={{ fontFamily: 'DM Sans', fontWeight: 600, color: '#F8FAFC', marginBottom: '0.2rem' }}>
+                    <p style={{ fontFamily: 'DM Sans', fontWeight: 600, color: 'var(--text)', marginBottom: '0.2rem' }}>
                       {user.name}
                     </p>
-                    <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.85rem' }}>
+                    <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.85rem' }}>
                       {user.email} {user.company && `· ${user.company}`}
                     </p>
                   </div>
@@ -145,12 +145,12 @@ const AdminPanel = () => {
                       textTransform: 'uppercase', letterSpacing: '0.06em'
                     }}>{user.role}</span>
                     <button onClick={() => deleteUser(user._id)} style={{
-                      background: 'transparent', border: '1px solid #1E293B',
+                      background: 'transparent', border: '1px solid var(--border)',
                       color: '#64748B', fontFamily: 'DM Sans', fontSize: '0.8rem',
                       padding: '0.3rem 0.75rem', borderRadius: '6px', cursor: 'pointer'
                     }}
                       onMouseEnter={e => { e.target.style.borderColor = '#EF4444'; e.target.style.color = '#EF4444' }}
-                      onMouseLeave={e => { e.target.style.borderColor = '#1E293B'; e.target.style.color = '#64748B' }}>
+                      onMouseLeave={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.color = '#64748B' }}>
                       Delete
                     </button>
                   </div>
@@ -163,29 +163,29 @@ const AdminPanel = () => {
         {/* Jobs */}
         {activeTab === 'jobs' && (
           <div>
-            <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', marginBottom: '1.25rem' }}>
+            <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', marginBottom: '1.25rem' }}>
               {jobs.length} total jobs
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {jobs.map(job => (
                 <div key={job._id} style={{
-                  background: '#111827', border: '1px solid #1E293B',
+                  background: 'var(--surface)', border: '1px solid var(--border)',
                   borderRadius: '14px', padding: '1.25rem',
                   display: 'flex', justifyContent: 'space-between',
                   alignItems: 'center', flexWrap: 'wrap', gap: '1rem'
                 }}>
                   <div>
-                    <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.05rem', color: '#F8FAFC', marginBottom: '0.3rem' }}>
+                    <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.05rem', color: 'var(--text)', marginBottom: '0.3rem' }}>
                       {job.title}
                     </h3>
-                    <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.85rem' }}>
+                    <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.85rem' }}>
                       {job.company} · {job.location} · {job.applicantsCount} applicants
                     </p>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                     <button onClick={() => toggleFeatured(job._id)} style={{
                       background: job.isFeatured ? 'rgba(245,158,11,0.1)' : 'transparent',
-                      border: job.isFeatured ? '1px solid rgba(245,158,11,0.4)' : '1px solid #1E293B',
+                      border: job.isFeatured ? '1px solid rgba(245,158,11,0.4)' : '1px solid var(--border)',
                       color: job.isFeatured ? '#F59E0B' : '#64748B',
                       fontFamily: 'DM Sans', fontSize: '0.8rem',
                       padding: '0.3rem 0.75rem', borderRadius: '6px', cursor: 'pointer'
@@ -193,12 +193,12 @@ const AdminPanel = () => {
                       {job.isFeatured ? '⭐ Featured' : 'Feature'}
                     </button>
                     <button onClick={() => deleteJob(job._id)} style={{
-                      background: 'transparent', border: '1px solid #1E293B',
+                      background: 'transparent', border: '1px solid var(--border)',
                       color: '#64748B', fontFamily: 'DM Sans', fontSize: '0.8rem',
                       padding: '0.3rem 0.75rem', borderRadius: '6px', cursor: 'pointer'
                     }}
                       onMouseEnter={e => { e.target.style.borderColor = '#EF4444'; e.target.style.color = '#EF4444' }}
-                      onMouseLeave={e => { e.target.style.borderColor = '#1E293B'; e.target.style.color = '#64748B' }}>
+                      onMouseLeave={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.color = '#64748B' }}>
                       Delete
                     </button>
                   </div>

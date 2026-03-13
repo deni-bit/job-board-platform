@@ -88,16 +88,10 @@ const Navbar = () => {
               </Link>
               <Link to="/register" style={{
                 background: 'linear-gradient(135deg, #F59E0B, #D97706)',
-                color: '#0A0F1E',
-                fontFamily: 'DM Sans, sans-serif',
-                fontWeight: 600,
-                fontSize: '0.9rem',
-                padding: '0.5rem 1.2rem',
-                borderRadius: '8px',
-                textDecoration: 'none',
-              }}>
-                Get Started
-              </Link>
+                color: 'var(--navy)', fontFamily: 'DM Sans, sans-serif',
+                fontWeight: 600, fontSize: '0.9rem',
+                padding: '0.5rem 1.2rem', borderRadius: '8px', textDecoration: 'none',
+              }}>Get Started</Link>
             </>
           ) : (
             <>
@@ -126,26 +120,17 @@ const Navbar = () => {
                   {user.name}
                 </span>
                 <span style={{
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '0.7rem',
-                  background: 'rgba(245, 158, 11, 0.15)',
-                  color: 'var(--gold)',
+                  fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem',
+                  background: 'rgba(245, 158, 11, 0.15)', color: 'var(--gold)',
                   border: '1px solid rgba(245, 158, 11, 0.3)',
-                  padding: '0.2rem 0.6rem',
-                  borderRadius: '4px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em'
+                  padding: '0.2rem 0.6rem', borderRadius: '4px',
+                  textTransform: 'uppercase', letterSpacing: '0.08em'
                 }}>{user.role}</span>
                 <button onClick={handleLogout} style={{
-                  background: 'transparent',
-                  border: '1px solid var(--border)',
-                  color: 'var(--muted)',
-                  fontFamily: 'DM Sans',
-                  fontWeight: 500,
-                  fontSize: '0.85rem',
-                  padding: '0.4rem 1rem',
-                  borderRadius: '8px',
-                  cursor: 'pointer'
+                  background: 'transparent', border: '1px solid var(--border)',
+                  color: 'var(--muted)', fontFamily: 'DM Sans', fontWeight: 500,
+                  fontSize: '0.85rem', padding: '0.4rem 1rem',
+                  borderRadius: '8px', cursor: 'pointer'
                 }}
                   onMouseEnter={e => { e.target.style.borderColor = '#EF4444'; e.target.style.color = '#EF4444' }}
                   onMouseLeave={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.color = 'var(--muted)' }}>
@@ -159,8 +144,8 @@ const Navbar = () => {
           <ThemeToggle />
         </div>
 
-        {/* Mobile right side — toggle + hamburger */}
-        <div className="md:hidden" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        {/* Mobile right side — NO inline display style so md:hidden works */}
+        <div className="md:hidden flex items-center gap-3">
           <ThemeToggle />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -201,7 +186,7 @@ const Navbar = () => {
               <Link to="/register" onClick={() => setMenuOpen(false)} style={{
                 display: 'inline-block', marginTop: '0.5rem',
                 background: 'linear-gradient(135deg, #F59E0B, #D97706)',
-                color: '#0A0F1E', fontFamily: 'DM Sans, sans-serif',
+                color: 'var(--navy)', fontFamily: 'DM Sans, sans-serif',
                 fontWeight: 600, fontSize: '0.9rem',
                 padding: '0.6rem 1.4rem', borderRadius: '8px', textDecoration: 'none',
               }}>Get Started</Link>

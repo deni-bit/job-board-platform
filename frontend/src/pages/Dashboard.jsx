@@ -73,7 +73,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div style={{ background: '#0A0F1E', minHeight: '100vh', padding: '3rem 1.5rem' }}>
+    <div style={{ background: 'var(--navy)', minHeight: '100vh', padding: '3rem 1.5rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
         {/* Header */}
@@ -81,15 +81,15 @@ const Dashboard = () => {
           <div>
             <h1 style={{
               fontFamily: 'Playfair Display, serif', fontSize: '2.5rem',
-              fontWeight: 700, color: '#F8FAFC', marginBottom: '0.3rem'
+              fontWeight: 700, color: 'var(--text)', marginBottom: '0.3rem'
             }}>Dashboard</h1>
-            <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>
+            <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>
               {user?.company} — {jobs.length} job{jobs.length !== 1 ? 's' : ''} posted
             </p>
           </div>
           <Link to="/post-job" style={{
             background: 'linear-gradient(135deg, #F59E0B, #D97706)',
-            color: '#0A0F1E', fontFamily: 'DM Sans', fontWeight: 700,
+            color: 'var(--navy)', fontFamily: 'DM Sans', fontWeight: 700,
             fontSize: '0.95rem', padding: '0.8rem 1.75rem',
             borderRadius: '10px', textDecoration: 'none'
           }}>+ Post New Job</Link>
@@ -107,7 +107,7 @@ const Dashboard = () => {
             { label: 'Featured Jobs', value: jobs.filter(j => j.isFeatured).length, icon: '⭐' },
           ].map(stat => (
             <div key={stat.label} style={{
-              background: '#111827', border: '1px solid #1E293B',
+              background: 'var(--surface)', border: '1px solid var(--border)',
               borderRadius: '14px', padding: '1.5rem'
             }}>
               <div style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>{stat.icon}</div>
@@ -115,7 +115,7 @@ const Dashboard = () => {
                 fontFamily: 'Playfair Display, serif', fontSize: '2rem',
                 fontWeight: 700, color: '#F59E0B', marginBottom: '0.25rem'
               }}>{stat.value}</div>
-              <div style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.85rem' }}>{stat.label}</div>
+              <div style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.85rem' }}>{stat.label}</div>
             </div>
           ))}
         </div>
@@ -126,21 +126,21 @@ const Dashboard = () => {
           <div>
             <h2 style={{
               fontFamily: 'Playfair Display, serif', fontSize: '1.4rem',
-              color: '#F8FAFC', marginBottom: '1rem'
+              color: 'var(--text)', marginBottom: '1rem'
             }}>Your Jobs</h2>
 
             {loading ? (
-              <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>Loading...</p>
+              <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>Loading...</p>
             ) : jobs.length === 0 ? (
               <div style={{
-                background: '#111827', border: '1px solid #1E293B',
+                background: 'var(--surface)', border: '1px solid var(--border)',
                 borderRadius: '16px', padding: '3rem', textAlign: 'center'
               }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>💼</div>
-                <p style={{ fontFamily: 'Playfair Display, serif', color: '#F8FAFC', fontSize: '1.1rem', marginBottom: '0.5rem' }}>
+                <p style={{ fontFamily: 'Playfair Display, serif', color: 'var(--text)', fontSize: '1.1rem', marginBottom: '0.5rem' }}>
                   No jobs posted yet
                 </p>
-                <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.9rem' }}>
+                <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.9rem' }}>
                   Post your first job to start receiving applications
                 </p>
               </div>
@@ -148,8 +148,8 @@ const Dashboard = () => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {jobs.map(job => (
                   <div key={job._id} style={{
-                    background: '#111827',
-                    border: selectedJob === job._id ? '1px solid rgba(245,158,11,0.5)' : '1px solid #1E293B',
+                    background: 'var(--surface)',
+                    border: selectedJob === job._id ? '1px solid rgba(245,158,11,0.5)' : '1px solid var(--border)',
                     borderRadius: '14px', padding: '1.25rem',
                     cursor: 'pointer'
                   }}
@@ -158,9 +158,9 @@ const Dashboard = () => {
                       <div>
                         <h3 style={{
                           fontFamily: 'Playfair Display, serif', fontSize: '1.05rem',
-                          color: '#F8FAFC', marginBottom: '0.3rem'
+                          color: 'var(--text)', marginBottom: '0.3rem'
                         }}>{job.title}</h3>
-                        <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.85rem' }}>
+                        <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.85rem' }}>
                           {job.location} · {job.type} · {job.applicantsCount} applicants
                         </p>
                       </div>
@@ -176,12 +176,12 @@ const Dashboard = () => {
                         <button
                           onClick={e => { e.stopPropagation(); deleteJob(job._id) }}
                           style={{
-                            background: 'transparent', border: '1px solid #1E293B',
+                            background: 'transparent', border: '1px solid var(--border)',
                             color: '#64748B', fontFamily: 'DM Sans', fontSize: '0.8rem',
                             padding: '0.3rem 0.6rem', borderRadius: '6px', cursor: 'pointer'
                           }}
                           onMouseEnter={e => { e.target.style.borderColor = '#EF4444'; e.target.style.color = '#EF4444' }}
-                          onMouseLeave={e => { e.target.style.borderColor = '#1E293B'; e.target.style.color = '#64748B' }}>
+                          onMouseLeave={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.color = '#64748B' }}>
                           Delete
                         </button>
                       </div>
@@ -197,22 +197,22 @@ const Dashboard = () => {
             <div>
               <h2 style={{
                 fontFamily: 'Playfair Display, serif', fontSize: '1.4rem',
-                color: '#F8FAFC', marginBottom: '1rem'
+                color: 'var(--text)', marginBottom: '1rem'
               }}>Applicants
-                <span style={{ fontFamily: 'DM Sans', fontSize: '0.9rem', color: '#94A3B8', fontWeight: 400, marginLeft: '0.75rem' }}>
+                <span style={{ fontFamily: 'DM Sans', fontSize: '0.9rem', color: 'var(--muted)', fontWeight: 400, marginLeft: '0.75rem' }}>
                   {applicants.length} total
                 </span>
               </h2>
 
               {loadingApplicants ? (
-                <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>Loading applicants...</p>
+                <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>Loading applicants...</p>
               ) : applicants.length === 0 ? (
                 <div style={{
-                  background: '#111827', border: '1px solid #1E293B',
+                  background: 'var(--surface)', border: '1px solid var(--border)',
                   borderRadius: '16px', padding: '2.5rem', textAlign: 'center'
                 }}>
                   <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>👥</div>
-                  <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>No applications yet</p>
+                  <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>No applications yet</p>
                 </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -220,16 +220,16 @@ const Dashboard = () => {
                     const s = statusColors[app.status] || statusColors.pending
                     return (
                       <div key={app._id} style={{
-                        background: '#111827', border: '1px solid #1E293B',
+                        background: 'var(--surface)', border: '1px solid var(--border)',
                         borderRadius: '14px', padding: '1.25rem'
                       }}>
                         {/* Applicant Info */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
                           <div>
-                            <p style={{ fontFamily: 'DM Sans', fontWeight: 600, color: '#F8FAFC', marginBottom: '0.2rem' }}>
+                            <p style={{ fontFamily: 'DM Sans', fontWeight: 600, color: 'var(--text)', marginBottom: '0.2rem' }}>
                               {app.applicant?.name}
                             </p>
-                            <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.85rem' }}>
+                            <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.85rem' }}>
                               {app.applicant?.email}
                             </p>
                           </div>
@@ -246,10 +246,10 @@ const Dashboard = () => {
                           <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
                             {app.applicant.skills.map(skill => (
                               <span key={skill} style={{
-                                background: '#1A2235', color: '#64748B',
+                                background: 'var(--surface2)', color: '#64748B',
                                 fontFamily: 'JetBrains Mono', fontSize: '0.65rem',
                                 padding: '0.2rem 0.5rem', borderRadius: '4px',
-                                border: '1px solid #1E293B'
+                                border: '1px solid var(--border)'
                               }}>{skill}</span>
                             ))}
                           </div>
@@ -283,8 +283,8 @@ const Dashboard = () => {
                             value={app.status}
                             onChange={e => updateStatus(app._id, e.target.value)}
                             style={{
-                              background: '#1A2235', border: '1px solid #1E293B',
-                              color: '#94A3B8', fontFamily: 'DM Sans', fontSize: '0.8rem',
+                              background: 'var(--surface2)', border: '1px solid var(--border)',
+                              color: 'var(--muted)', fontFamily: 'DM Sans', fontSize: '0.8rem',
                               padding: '0.3rem 0.6rem', borderRadius: '6px',
                               cursor: 'pointer', outline: 'none'
                             }}>

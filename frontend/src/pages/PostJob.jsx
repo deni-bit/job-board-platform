@@ -44,8 +44,8 @@ const PostJob = () => {
   }
 
   const inputStyle = {
-    width: '100%', background: '#1A2235', border: '1px solid #1E293B',
-    color: '#F8FAFC', fontFamily: 'DM Sans, sans-serif', fontSize: '0.95rem',
+    width: '100%', background: 'var(--surface2)', border: '1px solid var(--border)',
+    color: 'var(--text)', fontFamily: 'DM Sans, sans-serif', fontSize: '0.95rem',
     padding: '0.8rem 1rem', borderRadius: '10px', outline: 'none',
     boxSizing: 'border-box'
   }
@@ -57,22 +57,22 @@ const PostJob = () => {
   }
 
   return (
-    <div style={{ background: '#0A0F1E', minHeight: '100vh', padding: '3rem 1.5rem' }}>
+    <div style={{ background: 'var(--navy)', minHeight: '100vh', padding: '3rem 1.5rem' }}>
       <div style={{ maxWidth: '760px', margin: '0 auto' }}>
 
         {/* Header */}
         <div style={{ marginBottom: '2.5rem' }}>
           <h1 style={{
             fontFamily: 'Playfair Display, serif', fontSize: '2.5rem',
-            fontWeight: 700, color: '#F8FAFC', marginBottom: '0.5rem'
+            fontWeight: 700, color: 'var(--text)', marginBottom: '0.5rem'
           }}>Post a Job</h1>
-          <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>
+          <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>
             Posting as <span style={{ color: '#F59E0B' }}>{user?.company}</span>
           </p>
         </div>
 
         <div style={{
-          background: '#111827', border: '1px solid #1E293B',
+          background: 'var(--surface)', border: '1px solid var(--border)',
           borderRadius: '20px', padding: '2.5rem'
         }}>
           {error && (
@@ -190,7 +190,7 @@ const PostJob = () => {
             <div style={{ display: 'flex', gap: '1rem' }}>
               <button type="submit" disabled={loading} style={{
                 background: loading ? '#92400E' : 'linear-gradient(135deg, #F59E0B, #D97706)',
-                color: '#0A0F1E', fontFamily: 'DM Sans', fontWeight: 700,
+                color: 'var(--navy)', fontFamily: 'DM Sans', fontWeight: 700,
                 fontSize: '1rem', padding: '0.9rem 2.5rem',
                 borderRadius: '10px', border: 'none',
                 cursor: loading ? 'not-allowed' : 'pointer'
@@ -198,8 +198,8 @@ const PostJob = () => {
                 {loading ? 'Posting...' : 'Post Job →'}
               </button>
               <button type="button" onClick={() => navigate('/dashboard')} style={{
-                background: 'transparent', border: '1px solid #1E293B',
-                color: '#94A3B8', fontFamily: 'DM Sans', fontWeight: 500,
+                background: 'transparent', border: '1px solid var(--border)',
+                color: 'var(--muted)', fontFamily: 'DM Sans', fontWeight: 500,
                 fontSize: '1rem', padding: '0.9rem 1.5rem',
                 borderRadius: '10px', cursor: 'pointer'
               }}>Cancel</button>

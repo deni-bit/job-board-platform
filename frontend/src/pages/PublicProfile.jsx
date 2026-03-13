@@ -24,31 +24,31 @@ const PublicProfile = () => {
   }, [id])
 
   if (loading) return (
-    <div style={{ minHeight: '100vh', background: '#0A0F1E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>Loading profile...</p>
+    <div style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>Loading profile...</p>
     </div>
   )
 
   if (error || !profile) return (
-    <div style={{ minHeight: '100vh', background: '#0A0F1E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>Profile not found</p>
+    <div style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>Profile not found</p>
     </div>
   )
 
   return (
-    <div style={{ background: '#0A0F1E', minHeight: '100vh', padding: '3rem 1.5rem' }}>
+    <div style={{ background: 'var(--navy)', minHeight: '100vh', padding: '3rem 1.5rem' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
 
         {/* Back */}
         <button onClick={() => navigate(-1)} style={{
-          background: 'none', border: 'none', color: '#94A3B8',
+          background: 'none', border: 'none', color: 'var(--muted)',
           fontFamily: 'DM Sans', fontSize: '0.9rem', cursor: 'pointer',
           marginBottom: '2rem', padding: 0, display: 'flex', alignItems: 'center', gap: '0.4rem'
         }}>← Back</button>
 
         {/* Profile Header */}
         <div style={{
-          background: '#111827', border: '1px solid #1E293B',
+          background: 'var(--surface)', border: '1px solid var(--border)',
           borderRadius: '20px', padding: '2.5rem', marginBottom: '1.5rem'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
@@ -58,7 +58,7 @@ const PublicProfile = () => {
               width: '90px', height: '90px', borderRadius: '50%',
               background: 'linear-gradient(135deg, #F59E0B, #D97706)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '2rem', fontWeight: 700, color: '#0A0F1E',
+              fontSize: '2rem', fontWeight: 700, color: 'var(--navy)',
               fontFamily: 'DM Sans', flexShrink: 0, overflow: 'hidden'
             }}>
               {profile.avatar
@@ -71,9 +71,9 @@ const PublicProfile = () => {
             <div style={{ flex: 1 }}>
               <h1 style={{
                 fontFamily: 'Playfair Display, serif', fontSize: '2rem',
-                fontWeight: 700, color: '#F8FAFC', marginBottom: '0.3rem'
+                fontWeight: 700, color: 'var(--text)', marginBottom: '0.3rem'
               }}>{profile.name}</h1>
-              <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.95rem', marginBottom: '0.5rem' }}>
+              <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.95rem', marginBottom: '0.5rem' }}>
                 ✉️ {profile.email}
               </p>
               <span style={{
@@ -90,14 +90,14 @@ const PublicProfile = () => {
           {profile.bio && (
             <div style={{
               marginTop: '1.5rem', paddingTop: '1.5rem',
-              borderTop: '1px solid #1E293B'
+              borderTop: '1px solid var(--border)'
             }}>
               <h2 style={{
                 fontFamily: 'Playfair Display, serif', fontSize: '1.1rem',
-                color: '#F8FAFC', marginBottom: '0.75rem'
+                color: 'var(--text)', marginBottom: '0.75rem'
               }}>About</h2>
               <p style={{
-                fontFamily: 'DM Sans', color: '#94A3B8',
+                fontFamily: 'DM Sans', color: 'var(--muted)',
                 lineHeight: 1.8, fontSize: '0.95rem'
               }}>{profile.bio}</p>
             </div>
@@ -107,12 +107,12 @@ const PublicProfile = () => {
         {/* Skills */}
         {profile.skills?.length > 0 && (
           <div style={{
-            background: '#111827', border: '1px solid #1E293B',
+            background: 'var(--surface)', border: '1px solid var(--border)',
             borderRadius: '20px', padding: '2rem', marginBottom: '1.5rem'
           }}>
             <h2 style={{
               fontFamily: 'Playfair Display, serif', fontSize: '1.3rem',
-              color: '#F8FAFC', marginBottom: '1rem'
+              color: 'var(--text)', marginBottom: '1rem'
             }}>Skills</h2>
             <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
               {profile.skills.map(skill => (
@@ -130,12 +130,12 @@ const PublicProfile = () => {
         {/* Resume */}
         {profile.resume && (
           <div style={{
-            background: '#111827', border: '1px solid #1E293B',
+            background: 'var(--surface)', border: '1px solid var(--border)',
             borderRadius: '20px', padding: '2rem', marginBottom: '1.5rem'
           }}>
             <h2 style={{
               fontFamily: 'Playfair Display, serif', fontSize: '1.3rem',
-              color: '#F8FAFC', marginBottom: '1rem'
+              color: 'var(--text)', marginBottom: '1rem'
             }}>Resume / CV</h2>
             <a href={profile.resume} target="_blank" rel="noreferrer" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
@@ -150,7 +150,7 @@ const PublicProfile = () => {
 
         {/* Member Since */}
         <div style={{
-          background: '#111827', border: '1px solid #1E293B',
+          background: 'var(--surface)', border: '1px solid var(--border)',
           borderRadius: '20px', padding: '1.5rem',
           display: 'flex', alignItems: 'center', gap: '0.75rem'
         }}>

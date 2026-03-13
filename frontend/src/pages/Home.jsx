@@ -18,7 +18,7 @@ const Home = () => {
   const { user } = useSelector((state) => state.auth)
 
   return (
-    <div style={{ background: '#0A0F1E', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--navy)', minHeight: '100vh' }}>
 
       {/* Hero */}
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '6rem 1.5rem 4rem', textAlign: 'center' }}>
@@ -46,7 +46,7 @@ const Home = () => {
           fontFamily: 'Playfair Display, serif',
           fontSize: 'clamp(3rem, 8vw, 6rem)',
           fontWeight: 700,
-          color: '#F8FAFC',
+          color: 'var(--text)',
           lineHeight: 1.1,
           letterSpacing: '-0.02em',
           marginBottom: '1.5rem'
@@ -63,7 +63,7 @@ const Home = () => {
         <p style={{
           fontFamily: 'DM Sans, sans-serif',
           fontSize: '1.2rem',
-          color: '#94A3B8',
+          color: 'var(--muted)',
           maxWidth: '560px',
           margin: '0 auto 3rem',
           lineHeight: 1.7,
@@ -77,7 +77,7 @@ const Home = () => {
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link to="/jobs" style={{
             background: 'linear-gradient(135deg, #F59E0B, #D97706)',
-            color: '#0A0F1E',
+            color: 'var(--navy)',
             fontFamily: 'DM Sans, sans-serif',
             fontWeight: 700,
             fontSize: '1rem',
@@ -91,14 +91,14 @@ const Home = () => {
           {!user && (
             <Link to="/register" style={{
               background: 'transparent',
-              color: '#F8FAFC',
+              color: 'var(--text)',
               fontFamily: 'DM Sans, sans-serif',
               fontWeight: 600,
               fontSize: '1rem',
               padding: '0.9rem 2.5rem',
               borderRadius: '12px',
               textDecoration: 'none',
-              border: '1px solid #1E293B'
+              border: '1px solid var(--border)'
             }}>
               Create Account
             </Link>
@@ -106,14 +106,14 @@ const Home = () => {
           {user?.role === 'employer' && (
             <Link to="/post-job" style={{
               background: 'transparent',
-              color: '#F8FAFC',
+              color: 'var(--text)',
               fontFamily: 'DM Sans, sans-serif',
               fontWeight: 600,
               fontSize: '1rem',
               padding: '0.9rem 2.5rem',
               borderRadius: '12px',
               textDecoration: 'none',
-              border: '1px solid #1E293B'
+              border: '1px solid var(--border)'
             }}>
               Post a Job
             </Link>
@@ -126,8 +126,8 @@ const Home = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
           {stats.map((stat) => (
             <div key={stat.label} style={{
-              background: '#111827',
-              border: '1px solid #1E293B',
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
               borderRadius: '16px',
               padding: '2rem',
               textAlign: 'center'
@@ -142,7 +142,7 @@ const Home = () => {
                 backgroundClip: 'text',
                 marginBottom: '0.5rem'
               }}>{stat.number}</div>
-              <div style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.9rem' }}>{stat.label}</div>
+              <div style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.9rem' }}>{stat.label}</div>
             </div>
           ))}
         </div>
@@ -154,7 +154,7 @@ const Home = () => {
           fontFamily: 'Playfair Display, serif',
           fontSize: '2.5rem',
           fontWeight: 700,
-          color: '#F8FAFC',
+          color: 'var(--text)',
           textAlign: 'center',
           marginBottom: '3rem'
         }}>Why JobConnect?</h2>
@@ -162,23 +162,23 @@ const Home = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
           {features.map((f) => (
             <div key={f.title} style={{
-              background: '#111827',
-              border: '1px solid #1E293B',
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
               borderRadius: '20px',
               padding: '2.5rem',
               cursor: 'default'
             }}
               onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(245,158,11,0.4)'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = '#1E293B'}>
+              onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}>
               <div style={{ fontSize: '2.5rem', marginBottom: '1.2rem' }}>{f.icon}</div>
               <h3 style={{
                 fontFamily: 'Playfair Display, serif',
                 fontSize: '1.3rem',
                 fontWeight: 600,
-                color: '#F8FAFC',
+                color: 'var(--text)',
                 marginBottom: '0.75rem'
               }}>{f.title}</h3>
-              <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', lineHeight: 1.7, fontSize: '0.95rem' }}>{f.desc}</p>
+              <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', lineHeight: 1.7, fontSize: '0.95rem' }}>{f.desc}</p>
             </div>
           ))}
         </div>
@@ -186,7 +186,7 @@ const Home = () => {
 
       {/* Footer */}
       <div style={{
-        borderTop: '1px solid #1E293B',
+        borderTop: '1px solid var(--border)',
         textAlign: 'center',
         padding: '2rem',
         fontFamily: 'DM Sans',

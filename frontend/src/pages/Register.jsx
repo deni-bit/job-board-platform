@@ -21,8 +21,8 @@ const Register = () => {
   }
 
   const inputStyle = {
-    width: '100%', background: '#1A2235', border: '1px solid #1E293B',
-    color: '#F8FAFC', fontFamily: 'DM Sans, sans-serif', fontSize: '0.95rem',
+    width: '100%', background: 'var(--surface2)', border: '1px solid var(--border)',
+    color: 'var(--text)', fontFamily: 'DM Sans, sans-serif', fontSize: '0.95rem',
     padding: '0.8rem 1rem', borderRadius: '10px', outline: 'none', boxSizing: 'border-box'
   }
 
@@ -33,27 +33,27 @@ const Register = () => {
 
   return (
     <div style={{
-      minHeight: '100vh', background: '#0A0F1E',
+      minHeight: '100vh', background: 'var(--navy)',
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem'
     }}>
       <div style={{ width: '100%', maxWidth: '480px' }}>
 
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
-            <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 700, color: '#F8FAFC' }}>
+            <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 700, color: 'var(--text)' }}>
               Job<span style={{ color: '#F59E0B' }}>Connect</span>
             </span>
           </Link>
           <h1 style={{
             fontFamily: 'Playfair Display, serif', fontSize: '2rem',
-            fontWeight: 700, color: '#F8FAFC', marginTop: '1.5rem', marginBottom: '0.5rem'
+            fontWeight: 700, color: 'var(--text)', marginTop: '1.5rem', marginBottom: '0.5rem'
           }}>Create your account</h1>
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#94A3B8', fontSize: '0.95rem' }}>
+          <p style={{ fontFamily: 'DM Sans, sans-serif', color: 'var(--muted)', fontSize: '0.95rem' }}>
             Join thousands of professionals on JobConnect
           </p>
         </div>
 
-        <div style={{ background: '#111827', border: '1px solid #1E293B', borderRadius: '20px', padding: '2.5rem' }}>
+        <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '20px', padding: '2.5rem' }}>
 
           {error && (
             <div style={{
@@ -75,9 +75,9 @@ const Register = () => {
                     style={{
                       padding: '0.85rem',
                       borderRadius: '10px',
-                      border: form.role === role ? '1px solid #F59E0B' : '1px solid #1E293B',
-                      background: form.role === role ? 'rgba(245,158,11,0.1)' : '#1A2235',
-                      color: form.role === role ? '#F59E0B' : '#94A3B8',
+                      border: form.role === role ? '1px solid #F59E0B' : '1px solid var(--border)',
+                      background: form.role === role ? 'rgba(245,158,11,0.1)' : 'var(--surface2)',
+                      color: form.role === role ? '#F59E0B' : 'var(--muted)',
                       fontFamily: 'DM Sans, sans-serif',
                       fontWeight: 600,
                       fontSize: '0.9rem',
@@ -123,7 +123,7 @@ const Register = () => {
             <button type="submit" disabled={loading} style={{
               width: '100%',
               background: loading ? '#92400E' : 'linear-gradient(135deg, #F59E0B, #D97706)',
-              color: '#0A0F1E', fontFamily: 'DM Sans, sans-serif', fontWeight: 700,
+              color: 'var(--navy)', fontFamily: 'DM Sans, sans-serif', fontWeight: 700,
               fontSize: '1rem', padding: '0.9rem', borderRadius: '10px',
               border: 'none', cursor: loading ? 'not-allowed' : 'pointer'
             }}>

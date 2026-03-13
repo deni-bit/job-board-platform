@@ -26,15 +26,15 @@ const Jobs = () => {
   }
 
   const inputStyle = {
-    background: '#111827', border: '1px solid #1E293B',
-    color: '#F8FAFC', fontFamily: 'DM Sans, sans-serif',
+    background: 'var(--surface)', border: '1px solid var(--border)',
+    color: 'var(--text)', fontFamily: 'DM Sans, sans-serif',
     fontSize: '0.9rem', padding: '0.75rem 1rem',
     borderRadius: '10px', outline: 'none', width: '100%',
     boxSizing: 'border-box'
   }
 
   return (
-    <div style={{ background: '#0A0F1E', minHeight: '100vh', padding: '3rem 1.5rem' }}>
+    <div style={{ background: 'var(--navy)', minHeight: '100vh', padding: '3rem 1.5rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
         {/* Header */}
@@ -42,16 +42,16 @@ const Jobs = () => {
           <h1 style={{
             fontFamily: 'Playfair Display, serif',
             fontSize: '2.8rem', fontWeight: 700,
-            color: '#F8FAFC', marginBottom: '0.5rem'
+            color: 'var(--text)', marginBottom: '0.5rem'
           }}>Browse Jobs</h1>
-          <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '1rem' }}>
+          <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '1rem' }}>
             {total} job{total !== 1 ? 's' : ''} available right now
           </p>
         </div>
 
         {/* Filters */}
         <div style={{
-          background: '#111827', border: '1px solid #1E293B',
+          background: 'var(--surface)', border: '1px solid var(--border)',
           borderRadius: '16px', padding: '1.5rem',
           display: 'grid',
           gridTemplateColumns: '1fr 1fr auto',
@@ -59,7 +59,7 @@ const Jobs = () => {
           alignItems: 'end'
         }}>
           <div>
-            <label style={{ display: 'block', fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.8rem', marginBottom: '0.4rem' }}>
+            <label style={{ display: 'block', fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.4rem' }}>
               Search
             </label>
             <input
@@ -71,7 +71,7 @@ const Jobs = () => {
           </div>
 
           <div>
-            <label style={{ display: 'block', fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.8rem', marginBottom: '0.4rem' }}>
+            <label style={{ display: 'block', fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.4rem' }}>
               Location
             </label>
             <input
@@ -83,7 +83,7 @@ const Jobs = () => {
           </div>
 
           <div>
-            <label style={{ display: 'block', fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.8rem', marginBottom: '0.4rem' }}>
+            <label style={{ display: 'block', fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.4rem' }}>
               Type
             </label>
             <select
@@ -101,20 +101,20 @@ const Jobs = () => {
 
         {/* Jobs Grid */}
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '4rem', fontFamily: 'DM Sans', color: '#94A3B8' }}>
+          <div style={{ textAlign: 'center', padding: '4rem', fontFamily: 'DM Sans', color: 'var(--muted)' }}>
             Loading jobs...
           </div>
         ) : jobs.length === 0 ? (
           <div style={{
             textAlign: 'center', padding: '4rem',
-            background: '#111827', border: '1px solid #1E293B',
+            background: 'var(--surface)', border: '1px solid var(--border)',
             borderRadius: '16px'
           }}>
             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔍</div>
-            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', color: '#F8FAFC', marginBottom: '0.5rem' }}>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', color: 'var(--text)', marginBottom: '0.5rem' }}>
               No jobs found
             </p>
-            <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>
+            <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>
               Try adjusting your search filters
             </p>
           </div>
@@ -132,9 +132,9 @@ const Jobs = () => {
                 onClick={() => setFilters({ ...filters, page })}
                 style={{
                   width: '40px', height: '40px', borderRadius: '8px',
-                  border: page === currentPage ? '1px solid #F59E0B' : '1px solid #1E293B',
-                  background: page === currentPage ? 'rgba(245,158,11,0.1)' : '#111827',
-                  color: page === currentPage ? '#F59E0B' : '#94A3B8',
+                  border: page === currentPage ? '1px solid #F59E0B' : '1px solid var(--border)',
+                  background: page === currentPage ? 'rgba(245,158,11,0.1)' : 'var(--surface)',
+                  color: page === currentPage ? '#F59E0B' : 'var(--muted)',
                   fontFamily: 'DM Sans', fontWeight: 600,
                   cursor: 'pointer', fontSize: '0.9rem'
                 }}>

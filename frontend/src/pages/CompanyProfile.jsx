@@ -24,14 +24,14 @@ const CompanyProfile = () => {
   }, [id])
 
   if (loading) return (
-    <div style={{ minHeight: '100vh', background: '#0A0F1E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>Loading company...</p>
+    <div style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>Loading company...</p>
     </div>
   )
 
   if (error || !data) return (
-    <div style={{ minHeight: '100vh', background: '#0A0F1E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>Company not found</p>
+    <div style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>Company not found</p>
     </div>
   )
 
@@ -45,19 +45,19 @@ const CompanyProfile = () => {
   }
 
   return (
-    <div style={{ background: '#0A0F1E', minHeight: '100vh', padding: '3rem 1.5rem' }}>
+    <div style={{ background: 'var(--navy)', minHeight: '100vh', padding: '3rem 1.5rem' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
 
         {/* Back */}
         <button onClick={() => navigate(-1)} style={{
-          background: 'none', border: 'none', color: '#94A3B8',
+          background: 'none', border: 'none', color: 'var(--muted)',
           fontFamily: 'DM Sans', fontSize: '0.9rem', cursor: 'pointer',
           marginBottom: '2rem', padding: 0, display: 'flex', alignItems: 'center', gap: '0.4rem'
         }}>← Back</button>
 
         {/* Company Header */}
         <div style={{
-          background: '#111827', border: '1px solid #1E293B',
+          background: 'var(--surface)', border: '1px solid var(--border)',
           borderRadius: '20px', padding: '2.5rem', marginBottom: '1.5rem'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
@@ -67,7 +67,7 @@ const CompanyProfile = () => {
               width: '90px', height: '90px', borderRadius: '16px',
               background: 'linear-gradient(135deg, #F59E0B, #D97706)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '2.2rem', fontWeight: 700, color: '#0A0F1E',
+              fontSize: '2.2rem', fontWeight: 700, color: 'var(--navy)',
               fontFamily: 'DM Sans', flexShrink: 0, overflow: 'hidden'
             }}>
               {employer.companyLogo
@@ -81,7 +81,7 @@ const CompanyProfile = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '0.4rem' }}>
                 <h1 style={{
                   fontFamily: 'Playfair Display, serif', fontSize: '2rem',
-                  fontWeight: 700, color: '#F8FAFC'
+                  fontWeight: 700, color: 'var(--text)'
                 }}>{employer.company || employer.name}</h1>
                 {employer.isVerified && (
                   <span style={{
@@ -94,7 +94,7 @@ const CompanyProfile = () => {
               </div>
 
               {employer.companyIndustry && (
-                <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.95rem', marginBottom: '0.5rem' }}>
+                <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.95rem', marginBottom: '0.5rem' }}>
                   {employer.companyIndustry}
                 </p>
               )}
@@ -103,21 +103,21 @@ const CompanyProfile = () => {
               <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
                 {employer.companyLocation && (
                   <span style={{
-                    background: '#1A2235', color: '#94A3B8', border: '1px solid #1E293B',
+                    background: 'var(--surface2)', color: 'var(--muted)', border: '1px solid var(--border)',
                     fontFamily: 'DM Sans', fontSize: '0.8rem',
                     padding: '0.25rem 0.7rem', borderRadius: '4px'
                   }}>📍 {employer.companyLocation}</span>
                 )}
                 {employer.companySize && (
                   <span style={{
-                    background: '#1A2235', color: '#94A3B8', border: '1px solid #1E293B',
+                    background: 'var(--surface2)', color: 'var(--muted)', border: '1px solid var(--border)',
                     fontFamily: 'DM Sans', fontSize: '0.8rem',
                     padding: '0.25rem 0.7rem', borderRadius: '4px'
                   }}>👥 {employer.companySize} employees</span>
                 )}
                 {employer.companyFoundedYear && (
                   <span style={{
-                    background: '#1A2235', color: '#94A3B8', border: '1px solid #1E293B',
+                    background: 'var(--surface2)', color: 'var(--muted)', border: '1px solid var(--border)',
                     fontFamily: 'DM Sans', fontSize: '0.8rem',
                     padding: '0.25rem 0.7rem', borderRadius: '4px'
                   }}>📅 Founded {employer.companyFoundedYear}</span>
@@ -147,14 +147,14 @@ const CompanyProfile = () => {
           {employer.companyDescription && (
             <div style={{
               marginTop: '1.5rem', paddingTop: '1.5rem',
-              borderTop: '1px solid #1E293B'
+              borderTop: '1px solid var(--border)'
             }}>
               <h2 style={{
                 fontFamily: 'Playfair Display, serif', fontSize: '1.1rem',
-                color: '#F8FAFC', marginBottom: '0.75rem'
+                color: 'var(--text)', marginBottom: '0.75rem'
               }}>About the Company</h2>
               <p style={{
-                fontFamily: 'DM Sans', color: '#94A3B8',
+                fontFamily: 'DM Sans', color: 'var(--muted)',
                 lineHeight: 1.8, fontSize: '0.95rem'
               }}>{employer.companyDescription}</p>
             </div>
@@ -163,47 +163,47 @@ const CompanyProfile = () => {
 
         {/* Open Positions */}
         <div style={{
-          background: '#111827', border: '1px solid #1E293B',
+          background: 'var(--surface)', border: '1px solid var(--border)',
           borderRadius: '20px', padding: '2rem'
         }}>
           <h2 style={{
             fontFamily: 'Playfair Display, serif', fontSize: '1.4rem',
-            color: '#F8FAFC', marginBottom: '1.25rem'
+            color: 'var(--text)', marginBottom: '1.25rem'
           }}>
             Open Positions
             <span style={{
               fontFamily: 'DM Sans', fontSize: '0.9rem',
-              color: '#94A3B8', fontWeight: 400, marginLeft: '0.75rem'
+              color: 'var(--muted)', fontWeight: 400, marginLeft: '0.75rem'
             }}>{jobs.length} available</span>
           </h2>
 
           {jobs.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '2rem 0' }}>
               <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>💼</div>
-              <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>No open positions at the moment</p>
+              <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>No open positions at the moment</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {jobs.map(job => (
                 <Link key={job._id} to={`/jobs/${job._id}`} style={{ textDecoration: 'none' }}>
                   <div style={{
-                    background: '#0A0F1E', border: '1px solid #1E293B',
+                    background: 'var(--navy)', border: '1px solid var(--border)',
                     borderRadius: '12px', padding: '1.25rem',
                     transition: 'border-color 0.2s',
                     cursor: 'pointer'
                   }}
                     onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(245,158,11,0.4)'}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = '#1E293B'}
+                    onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
                       <div>
                         <h3 style={{
                           fontFamily: 'Playfair Display, serif', fontSize: '1rem',
-                          color: '#F8FAFC', marginBottom: '0.3rem'
+                          color: 'var(--text)', marginBottom: '0.3rem'
                         }}>{job.title}</h3>
                         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                           <span style={{
-                            background: '#1A2235', color: '#94A3B8',
+                            background: 'var(--surface2)', color: 'var(--muted)',
                             fontFamily: 'DM Sans', fontSize: '0.8rem',
                             padding: '0.2rem 0.6rem', borderRadius: '4px'
                           }}>📍 {job.location}</span>

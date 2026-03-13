@@ -59,8 +59,8 @@ const CompanySettings = () => {
   }
 
   const inputStyle = {
-    width: '100%', background: '#1A2235', border: '1px solid #1E293B',
-    color: '#F8FAFC', fontFamily: 'DM Sans', fontSize: '0.95rem',
+    width: '100%', background: 'var(--surface2)', border: '1px solid var(--border)',
+    color: 'var(--text)', fontFamily: 'DM Sans', fontSize: '0.95rem',
     padding: '0.85rem 1rem', borderRadius: '10px', outline: 'none',
     boxSizing: 'border-box'
   }
@@ -71,7 +71,7 @@ const CompanySettings = () => {
   }
 
   return (
-    <div style={{ background: '#0A0F1E', minHeight: '100vh', padding: '3rem 1.5rem' }}>
+    <div style={{ background: 'var(--navy)', minHeight: '100vh', padding: '3rem 1.5rem' }}>
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
 
         {/* Header */}
@@ -79,9 +79,9 @@ const CompanySettings = () => {
           <div>
             <h1 style={{
               fontFamily: 'Playfair Display, serif', fontSize: '2.2rem',
-              fontWeight: 700, color: '#F8FAFC', marginBottom: '0.3rem'
+              fontWeight: 700, color: 'var(--text)', marginBottom: '0.3rem'
             }}>Company Profile</h1>
-            <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>
+            <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>
               How your company appears to jobseekers
             </p>
           </div>
@@ -95,7 +95,7 @@ const CompanySettings = () => {
 
         {/* Form */}
         <div style={{
-          background: '#111827', border: '1px solid #1E293B',
+          background: 'var(--surface)', border: '1px solid var(--border)',
           borderRadius: '20px', padding: '2.5rem'
         }}>
 
@@ -202,7 +202,7 @@ const CompanySettings = () => {
               {form.companyLogo && (
                 <div style={{ marginTop: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <img src={form.companyLogo} alt="Logo preview"
-                    style={{ width: '50px', height: '50px', borderRadius: '8px', objectFit: 'cover', border: '1px solid #1E293B' }}
+                    style={{ width: '50px', height: '50px', borderRadius: '8px', objectFit: 'cover', border: '1px solid var(--border)' }}
                     onError={e => e.target.style.display = 'none'}
                   />
                   <span style={{ fontFamily: 'DM Sans', color: '#64748B', fontSize: '0.8rem' }}>Logo preview</span>
@@ -225,7 +225,7 @@ const CompanySettings = () => {
             {/* Submit */}
             <button type="submit" disabled={loading} style={{
               background: loading ? '#92400E' : 'linear-gradient(135deg, #F59E0B, #D97706)',
-              color: '#0A0F1E', fontFamily: 'DM Sans', fontWeight: 700,
+              color: 'var(--navy)', fontFamily: 'DM Sans', fontWeight: 700,
               fontSize: '1rem', padding: '0.85rem 2.5rem',
               borderRadius: '10px', border: 'none',
               cursor: loading ? 'not-allowed' : 'pointer', width: '100%'

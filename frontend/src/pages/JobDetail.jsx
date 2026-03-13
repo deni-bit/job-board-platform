@@ -86,34 +86,34 @@ const JobDetail = () => {
   }
 
   if (loading) return (
-    <div style={{ minHeight: '100vh', background: '#0A0F1E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '1rem' }}>Loading job...</p>
+    <div style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '1rem' }}>Loading job...</p>
     </div>
   )
 
   if (!job) return (
-    <div style={{ minHeight: '100vh', background: '#0A0F1E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <p style={{ fontFamily: 'DM Sans', color: '#94A3B8' }}>Job not found</p>
+    <div style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)' }}>Job not found</p>
     </div>
   )
 
   const countdown = getCountdown(job.deadline)
 
   return (
-    <div style={{ background: '#0A0F1E', minHeight: '100vh', padding: '3rem 1.5rem' }}>
+    <div style={{ background: 'var(--navy)', minHeight: '100vh', padding: '3rem 1.5rem' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
 
         {/* Back */}
         <button onClick={() => navigate('/jobs')} style={{
-          background: 'none', border: 'none', color: '#94A3B8',
+          background: 'none', border: 'none', color: 'var(--muted)',
           fontFamily: 'DM Sans', fontSize: '0.9rem', cursor: 'pointer',
           marginBottom: '2rem', padding: 0, display: 'flex', alignItems: 'center', gap: '0.4rem'
         }}>← Back to Jobs</button>
 
         {/* Header Card */}
         <div style={{
-          background: '#111827',
-          border: job.isFeatured ? '1px solid rgba(245,158,11,0.4)' : '1px solid #1E293B',
+          background: 'var(--surface)',
+          border: job.isFeatured ? '1px solid rgba(245,158,11,0.4)' : '1px solid var(--border)',
           borderRadius: '20px', padding: '2.5rem', marginBottom: '1.5rem'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
@@ -121,20 +121,20 @@ const JobDetail = () => {
               {job.isFeatured && (
                 <span style={{
                   background: 'linear-gradient(135deg, #F59E0B, #D97706)',
-                  color: '#0A0F1E', fontFamily: 'JetBrains Mono, monospace',
+                  color: 'var(--navy)', fontFamily: 'JetBrains Mono, monospace',
                   fontSize: '0.65rem', fontWeight: 700,
                   padding: '0.2rem 0.6rem', borderRadius: '4px',
                   textTransform: 'uppercase', letterSpacing: '0.08em',
                   display: 'inline-block', marginBottom: '0.75rem'
                 }}>⭐ Featured</span>
               )}
-              <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.95rem', marginBottom: '0.4rem' }}>
+              <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.95rem', marginBottom: '0.4rem' }}>
                 {job.company}
               </p>
               <h1 style={{
                 fontFamily: 'Playfair Display, serif',
                 fontSize: '2.2rem', fontWeight: 700,
-                color: '#F8FAFC', lineHeight: 1.2, marginBottom: '1rem'
+                color: 'var(--text)', lineHeight: 1.2, marginBottom: '1rem'
               }}>{job.title}</h1>
 
               {/* Tags */}
@@ -148,7 +148,7 @@ const JobDetail = () => {
                 }}>{job.type}</span>
 
                 <span style={{
-                  background: '#1A2235', color: '#94A3B8', border: '1px solid #1E293B',
+                  background: 'var(--surface2)', color: 'var(--muted)', border: '1px solid var(--border)',
                   fontFamily: 'DM Sans', fontSize: '0.85rem',
                   padding: '0.3rem 0.75rem', borderRadius: '4px'
                 }}>📍 {job.location}</span>
@@ -165,13 +165,13 @@ const JobDetail = () => {
                 )}
 
                 <span style={{
-                  background: '#1A2235', color: '#64748B', border: '1px solid #1E293B',
+                  background: 'var(--surface2)', color: '#64748B', border: '1px solid var(--border)',
                   fontFamily: 'DM Sans', fontSize: '0.8rem',
                   padding: '0.3rem 0.75rem', borderRadius: '4px'
                 }}>{job.applicantsCount} applicants</span>
 
                 <span style={{
-                  background: '#1A2235', color: '#64748B', border: '1px solid #1E293B',
+                  background: 'var(--surface2)', color: '#64748B', border: '1px solid var(--border)',
                   fontFamily: 'DM Sans', fontSize: '0.8rem',
                   padding: '0.3rem 0.75rem', borderRadius: '4px'
                 }}>Posted {timeAgo(job.createdAt)}</span>
@@ -194,7 +194,7 @@ const JobDetail = () => {
               {user?.role === 'jobseeker' && !applied && (
                 <button onClick={() => setShowForm(!showForm)} style={{
                   background: 'linear-gradient(135deg, #F59E0B, #D97706)',
-                  color: '#0A0F1E', fontFamily: 'DM Sans', fontWeight: 700,
+                  color: 'var(--navy)', fontFamily: 'DM Sans', fontWeight: 700,
                   fontSize: '1rem', padding: '0.85rem 2rem',
                   borderRadius: '12px', border: 'none', cursor: 'pointer',
                   whiteSpace: 'nowrap'
@@ -212,7 +212,7 @@ const JobDetail = () => {
               {!user && (
                 <button onClick={() => navigate('/login')} style={{
                   background: 'linear-gradient(135deg, #F59E0B, #D97706)',
-                  color: '#0A0F1E', fontFamily: 'DM Sans', fontWeight: 700,
+                  color: 'var(--navy)', fontFamily: 'DM Sans', fontWeight: 700,
                   fontSize: '1rem', padding: '0.85rem 2rem',
                   borderRadius: '12px', border: 'none', cursor: 'pointer'
                 }}>Login to Apply</button>
@@ -248,12 +248,12 @@ const JobDetail = () => {
         {/* Apply Form */}
         {showForm && (
           <div style={{
-            background: '#111827', border: '1px solid rgba(245,158,11,0.3)',
+            background: 'var(--surface)', border: '1px solid rgba(245,158,11,0.3)',
             borderRadius: '20px', padding: '2rem', marginBottom: '1.5rem'
           }}>
             <h2 style={{
               fontFamily: 'Playfair Display, serif', fontSize: '1.5rem',
-              color: '#F8FAFC', marginBottom: '1.5rem'
+              color: 'var(--text)', marginBottom: '1.5rem'
             }}>Submit Application</h2>
 
             {error && (
@@ -276,8 +276,8 @@ const JobDetail = () => {
                   required rows={5}
                   placeholder="Tell the employer why you're a great fit..."
                   style={{
-                    width: '100%', background: '#1A2235', border: '1px solid #1E293B',
-                    color: '#F8FAFC', fontFamily: 'DM Sans', fontSize: '0.95rem',
+                    width: '100%', background: 'var(--surface2)', border: '1px solid var(--border)',
+                    color: 'var(--text)', fontFamily: 'DM Sans', fontSize: '0.95rem',
                     padding: '0.85rem 1rem', borderRadius: '10px', outline: 'none',
                     resize: 'vertical', boxSizing: 'border-box'
                   }}
@@ -293,8 +293,8 @@ const JobDetail = () => {
                   type="file" accept=".pdf,.jpg,.png"
                   onChange={e => setResumeFile(e.target.files[0])}
                   style={{
-                    width: '100%', background: '#1A2235', border: '1px solid #1E293B',
-                    color: '#94A3B8', fontFamily: 'DM Sans', fontSize: '0.9rem',
+                    width: '100%', background: 'var(--surface2)', border: '1px solid var(--border)',
+                    color: 'var(--muted)', fontFamily: 'DM Sans', fontSize: '0.9rem',
                     padding: '0.75rem 1rem', borderRadius: '10px',
                     boxSizing: 'border-box', cursor: 'pointer'
                   }}
@@ -303,7 +303,7 @@ const JobDetail = () => {
 
               <button type="submit" disabled={applying} style={{
                 background: applying ? '#92400E' : 'linear-gradient(135deg, #F59E0B, #D97706)',
-                color: '#0A0F1E', fontFamily: 'DM Sans', fontWeight: 700,
+                color: 'var(--navy)', fontFamily: 'DM Sans', fontWeight: 700,
                 fontSize: '1rem', padding: '0.85rem 2.5rem',
                 borderRadius: '10px', border: 'none', cursor: applying ? 'not-allowed' : 'pointer'
               }}>
@@ -315,15 +315,15 @@ const JobDetail = () => {
 
         {/* Description */}
         <div style={{
-          background: '#111827', border: '1px solid #1E293B',
+          background: 'var(--surface)', border: '1px solid var(--border)',
           borderRadius: '20px', padding: '2rem', marginBottom: '1.5rem'
         }}>
           <h2 style={{
             fontFamily: 'Playfair Display, serif', fontSize: '1.4rem',
-            color: '#F8FAFC', marginBottom: '1rem'
+            color: 'var(--text)', marginBottom: '1rem'
           }}>Job Description</h2>
           <p style={{
-            fontFamily: 'DM Sans', color: '#94A3B8',
+            fontFamily: 'DM Sans', color: 'var(--muted)',
             lineHeight: 1.8, fontSize: '0.95rem', whiteSpace: 'pre-line'
           }}>{job.description}</p>
         </div>
@@ -331,19 +331,19 @@ const JobDetail = () => {
         {/* Requirements */}
         {job.requirements?.length > 0 && (
           <div style={{
-            background: '#111827', border: '1px solid #1E293B',
+            background: 'var(--surface)', border: '1px solid var(--border)',
             borderRadius: '20px', padding: '2rem', marginBottom: '1.5rem'
           }}>
             <h2 style={{
               fontFamily: 'Playfair Display, serif', fontSize: '1.4rem',
-              color: '#F8FAFC', marginBottom: '1rem'
+              color: 'var(--text)', marginBottom: '1rem'
             }}>Requirements</h2>
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {job.requirements.map((req, i) => (
                 <li key={i} style={{
-                  fontFamily: 'DM Sans', color: '#94A3B8',
+                  fontFamily: 'DM Sans', color: 'var(--muted)',
                   fontSize: '0.95rem', padding: '0.5rem 0',
-                  borderBottom: i < job.requirements.length - 1 ? '1px solid #1E293B' : 'none',
+                  borderBottom: i < job.requirements.length - 1 ? '1px solid var(--border)' : 'none',
                   display: 'flex', alignItems: 'center', gap: '0.75rem'
                 }}>
                   <span style={{ color: '#F59E0B', fontSize: '0.8rem' }}>▸</span>
@@ -357,12 +357,12 @@ const JobDetail = () => {
         {/* Skills */}
         {job.skills?.length > 0 && (
           <div style={{
-            background: '#111827', border: '1px solid #1E293B',
+            background: 'var(--surface)', border: '1px solid var(--border)',
             borderRadius: '20px', padding: '2rem'
           }}>
             <h2 style={{
               fontFamily: 'Playfair Display, serif', fontSize: '1.4rem',
-              color: '#F8FAFC', marginBottom: '1rem'
+              color: 'var(--text)', marginBottom: '1rem'
             }}>Required Skills</h2>
             <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
               {job.skills.map(skill => (

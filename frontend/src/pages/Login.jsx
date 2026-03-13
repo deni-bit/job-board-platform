@@ -24,29 +24,29 @@ const Login = () => {
 
   return (
     <div style={{
-      minHeight: '100vh', background: '#0A0F1E',
+      minHeight: '100vh', background: 'var(--navy)',
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem'
     }}>
       <div style={{ width: '100%', maxWidth: '440px' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
-            <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 700, color: '#F8FAFC' }}>
+            <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 700, color: 'var(--text)' }}>
               Job<span style={{ color: '#F59E0B' }}>Connect</span>
             </span>
           </Link>
           <h1 style={{
             fontFamily: 'Playfair Display, serif', fontSize: '2rem',
-            fontWeight: 700, color: '#F8FAFC', marginTop: '1.5rem', marginBottom: '0.5rem'
+            fontWeight: 700, color: 'var(--text)', marginTop: '1.5rem', marginBottom: '0.5rem'
           }}>Welcome back</h1>
-          <p style={{ fontFamily: 'DM Sans', color: '#94A3B8', fontSize: '0.95rem' }}>
+          <p style={{ fontFamily: 'DM Sans', color: 'var(--muted)', fontSize: '0.95rem' }}>
             Login to your account to continue
           </p>
         </div>
 
         {/* Card */}
         <div style={{
-          background: '#111827', border: '1px solid #1E293B',
+          background: 'var(--surface)', border: '1px solid var(--border)',
           borderRadius: '20px', padding: '2.5rem'
         }}>
           {error && (
@@ -70,8 +70,8 @@ const Login = () => {
                 type="email" name="email" value={form.email}
                 onChange={handleChange} required placeholder="you@example.com"
                 style={{
-                  width: '100%', background: '#1A2235', border: '1px solid #1E293B',
-                  color: '#F8FAFC', fontFamily: 'DM Sans', fontSize: '0.95rem',
+                  width: '100%', background: 'var(--surface2)', border: '1px solid var(--border)',
+                  color: 'var(--text)', fontFamily: 'DM Sans', fontSize: '0.95rem',
                   padding: '0.8rem 1rem', borderRadius: '10px', outline: 'none',
                   boxSizing: 'border-box'
                 }}
@@ -90,8 +90,8 @@ const Login = () => {
                   name="password" value={form.password}
                   onChange={handleChange} required placeholder="••••••••"
                   style={{
-                    width: '100%', background: '#1A2235', border: '1px solid #1E293B',
-                    color: '#F8FAFC', fontFamily: 'DM Sans', fontSize: '0.95rem',
+                    width: '100%', background: 'var(--surface2)', border: '1px solid var(--border)',
+                    color: 'var(--text)', fontFamily: 'DM Sans', fontSize: '0.95rem',
                     padding: '0.8rem 3rem 0.8rem 1rem', borderRadius: '10px', outline: 'none',
                     boxSizing: 'border-box'
                   }}
@@ -115,7 +115,7 @@ const Login = () => {
             <button type="submit" disabled={loading} style={{
               width: '100%',
               background: loading ? '#92400E' : 'linear-gradient(135deg, #F59E0B, #D97706)',
-              color: '#0A0F1E', fontFamily: 'DM Sans', fontWeight: 700,
+              color: 'var(--navy)', fontFamily: 'DM Sans', fontWeight: 700,
               fontSize: '1rem', padding: '0.9rem', borderRadius: '10px',
               border: 'none', cursor: loading ? 'not-allowed' : 'pointer',
               letterSpacing: '0.01em'
