@@ -15,17 +15,16 @@
 
 /* ── LIGHT MODE ────────────────────────────────────────────────────────── */
 [data-theme="light"] {
-  --navy: #F1F5F9;
-  --surface: #FFFFFF;
-  --surface2: #F8FAFC;
+  --navy: #F5F3EF;
+  --surface: #FDFCFB;
+  --surface2: #EEEcE8;
   --gold: #D97706;
   --gold-light: #F59E0B;
   --coral: #DC2626;
-  --text: #0F172A;
-  --muted: #64748B;
-  --border: #E2E8F0;
+  --text: #1C1917;
+  --muted: #78716C;
+  --border: #E7E5E4;
 }
-
 * {
   margin: 0;
   padding: 0;
