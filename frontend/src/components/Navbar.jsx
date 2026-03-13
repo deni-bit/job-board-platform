@@ -2,12 +2,14 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../store/authSlice'
+import { useTheme } from '../context/ThemeContext'
 
 const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user } = useSelector((state) => state.auth)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   const handleLogout = () => {
     dispatch(logout())
@@ -16,7 +18,7 @@ const Navbar = () => {
   }
 
   const linkStyle = {
-    color: '#94A3B8',
+    color: 'var(--muted)',
     fontFamily: 'DM Sans, sans-serif',
     fontWeight: 500,
     fontSize: '0.95rem',
@@ -25,11 +27,32 @@ const Navbar = () => {
     display: 'block'
   }
 
+  const ThemeToggle = () => (
+    <button
+      onClick={toggleTheme}
+      title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      style={{
+        background: 'var(--surface2)',
+        border: '1px solid var(--border)',
+        borderRadius: '8px',
+        padding: '0.4rem 0.6rem',
+        cursor: 'pointer',
+        fontSize: '1rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        transition: 'all 0.2s'
+      }}
+    >
+      {theme === 'dark' ? '☀️' : '🌙'}
+    </button>
+  )
+
   return (
     <nav style={{
-      background: 'rgba(10, 15, 30, 0.95)',
+      background: theme === 'dark' ? 'rgba(10, 15, 30, 0.95)' : 'rgba(255,255,255,0.95)',
       backdropFilter: 'blur(12px)',
-      borderBottom: '1px solid #1E293B',
+      borderBottom: '1px solid var(--border)',
       position: 'sticky',
       top: 0,
       zIndex: 100
@@ -41,26 +64,26 @@ const Navbar = () => {
           fontFamily: 'Playfair Display, serif',
           fontSize: '1.5rem',
           fontWeight: 700,
-          color: '#F8FAFC',
+          color: 'var(--text)',
           letterSpacing: '-0.02em',
           textDecoration: 'none'
         }}>
-          Job<span style={{ color: '#F59E0B' }}>Connect</span>
+          Job<span style={{ color: 'var(--gold)' }}>Connect</span>
         </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-6">
           <Link to="/jobs" style={{ ...linkStyle, display: 'inline' }}
-            onMouseEnter={e => e.target.style.color = '#F8FAFC'}
-            onMouseLeave={e => e.target.style.color = '#94A3B8'}>
+            onMouseEnter={e => e.target.style.color = 'var(--text)'}
+            onMouseLeave={e => e.target.style.color = 'var(--muted)'}>
             Browse Jobs
           </Link>
 
           {!user ? (
             <>
               <Link to="/login" style={{ ...linkStyle, display: 'inline' }}
-                onMouseEnter={e => e.target.style.color = '#F8FAFC'}
-                onMouseLeave={e => e.target.style.color = '#94A3B8'}>
+                onMouseEnter={e => e.target.style.color = 'var(--text)'}
+                onMouseLeave={e => e.target.style.color = 'var(--muted)'}>
                 Login
               </Link>
               <Link to="/register" style={{
@@ -81,32 +104,32 @@ const Navbar = () => {
               {user.role === 'employer' && (
                 <>
                   <Link to="/post-job" style={{ ...linkStyle, display: 'inline' }}
-                    onMouseEnter={e => e.target.style.color = '#F8FAFC'}
-                    onMouseLeave={e => e.target.style.color = '#94A3B8'}>Post Job</Link>
+                    onMouseEnter={e => e.target.style.color = 'var(--text)'}
+                    onMouseLeave={e => e.target.style.color = 'var(--muted)'}>Post Job</Link>
                   <Link to="/dashboard" style={{ ...linkStyle, display: 'inline' }}
-                    onMouseEnter={e => e.target.style.color = '#F8FAFC'}
-                    onMouseLeave={e => e.target.style.color = '#94A3B8'}>Dashboard</Link>
+                    onMouseEnter={e => e.target.style.color = 'var(--text)'}
+                    onMouseLeave={e => e.target.style.color = 'var(--muted)'}>Dashboard</Link>
                 </>
               )}
               {user.role === 'jobseeker' && (
                 <Link to="/applications" style={{ ...linkStyle, display: 'inline' }}
-                  onMouseEnter={e => e.target.style.color = '#F8FAFC'}
-                  onMouseLeave={e => e.target.style.color = '#94A3B8'}>My Applications</Link>
+                  onMouseEnter={e => e.target.style.color = 'var(--text)'}
+                  onMouseLeave={e => e.target.style.color = 'var(--muted)'}>My Applications</Link>
               )}
               {user.role === 'admin' && (
                 <Link to="/admin" style={{ ...linkStyle, display: 'inline' }}
-                  onMouseEnter={e => e.target.style.color = '#F8FAFC'}
-                  onMouseLeave={e => e.target.style.color = '#94A3B8'}>Admin</Link>
+                  onMouseEnter={e => e.target.style.color = 'var(--text)'}
+                  onMouseLeave={e => e.target.style.color = 'var(--muted)'}>Admin</Link>
               )}
               <div className="flex items-center gap-3">
-                <span style={{ fontFamily: 'DM Sans', fontWeight: 500, color: '#F8FAFC', fontSize: '0.9rem' }}>
+                <span style={{ fontFamily: 'DM Sans', fontWeight: 500, color: 'var(--text)', fontSize: '0.9rem' }}>
                   {user.name}
                 </span>
                 <span style={{
                   fontFamily: 'JetBrains Mono, monospace',
                   fontSize: '0.7rem',
                   background: 'rgba(245, 158, 11, 0.15)',
-                  color: '#F59E0B',
+                  color: 'var(--gold)',
                   border: '1px solid rgba(245, 158, 11, 0.3)',
                   padding: '0.2rem 0.6rem',
                   borderRadius: '4px',
@@ -115,8 +138,8 @@ const Navbar = () => {
                 }}>{user.role}</span>
                 <button onClick={handleLogout} style={{
                   background: 'transparent',
-                  border: '1px solid #1E293B',
-                  color: '#94A3B8',
+                  border: '1px solid var(--border)',
+                  color: 'var(--muted)',
                   fontFamily: 'DM Sans',
                   fontWeight: 500,
                   fontSize: '0.85rem',
@@ -125,45 +148,51 @@ const Navbar = () => {
                   cursor: 'pointer'
                 }}
                   onMouseEnter={e => { e.target.style.borderColor = '#EF4444'; e.target.style.color = '#EF4444' }}
-                  onMouseLeave={e => { e.target.style.borderColor = '#1E293B'; e.target.style.color = '#94A3B8' }}>
+                  onMouseLeave={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.color = 'var(--muted)' }}>
                   Logout
                 </button>
               </div>
             </>
           )}
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
         </div>
 
-        {/* Hamburger Button — mobile only */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col justify-center items-center gap-1.5 p-2"
-          style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
-          <span style={{
-            display: 'block', width: '24px', height: '2px',
-            background: '#F8FAFC',
-            transition: 'all 0.3s',
-            transform: menuOpen ? 'rotate(45deg) translateY(6px)' : 'none'
-          }} />
-          <span style={{
-            display: 'block', width: '24px', height: '2px',
-            background: '#F8FAFC',
-            transition: 'all 0.3s',
-            opacity: menuOpen ? 0 : 1
-          }} />
-          <span style={{
-            display: 'block', width: '24px', height: '2px',
-            background: '#F8FAFC',
-            transition: 'all 0.3s',
-            transform: menuOpen ? 'rotate(-45deg) translateY(-6px)' : 'none'
-          }} />
-        </button>
+        {/* Mobile right side — toggle + hamburger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }} className="md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="flex flex-col justify-center items-center gap-1.5 p-2"
+            style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
+            <span style={{
+              display: 'block', width: '24px', height: '2px',
+              background: 'var(--text)',
+              transition: 'all 0.3s',
+              transform: menuOpen ? 'rotate(45deg) translateY(6px)' : 'none'
+            }} />
+            <span style={{
+              display: 'block', width: '24px', height: '2px',
+              background: 'var(--text)',
+              transition: 'all 0.3s',
+              opacity: menuOpen ? 0 : 1
+            }} />
+            <span style={{
+              display: 'block', width: '24px', height: '2px',
+              background: 'var(--text)',
+              transition: 'all 0.3s',
+              transform: menuOpen ? 'rotate(-45deg) translateY(-6px)' : 'none'
+            }} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
         <div style={{
-          background: '#0A0F1E',
-          borderTop: '1px solid #1E293B',
+          background: 'var(--navy)',
+          borderTop: '1px solid var(--border)',
           padding: '1rem 1.5rem 1.5rem',
         }}>
           <Link to="/jobs" style={linkStyle} onClick={() => setMenuOpen(false)}>Browse Jobs</Link>
@@ -188,15 +217,14 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              {/* User info */}
               <div style={{
                 display: 'flex', alignItems: 'center', gap: '0.75rem',
-                padding: '0.75rem 0', borderBottom: '1px solid #1E293B', marginBottom: '0.75rem'
+                padding: '0.75rem 0', borderBottom: '1px solid var(--border)', marginBottom: '0.75rem'
               }}>
-                <span style={{ color: '#F8FAFC', fontFamily: 'DM Sans', fontWeight: 600 }}>{user.name}</span>
+                <span style={{ color: 'var(--text)', fontFamily: 'DM Sans', fontWeight: 600 }}>{user.name}</span>
                 <span style={{
                   fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem',
-                  background: 'rgba(245, 158, 11, 0.15)', color: '#F59E0B',
+                  background: 'rgba(245, 158, 11, 0.15)', color: 'var(--gold)',
                   border: '1px solid rgba(245, 158, 11, 0.3)',
                   padding: '0.15rem 0.5rem', borderRadius: '4px',
                   textTransform: 'uppercase', letterSpacing: '0.08em'
